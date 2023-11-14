@@ -111,11 +111,13 @@ function init(){
       
       if (pct){
         shapesPaths.eq(num).css({
-          'stroke-dasharray': (shapesPathsLengths[num] * npct / .8) + 'px, ' + shapesPathsLengths[num] + 'px'
+          'stroke-dasharray': (shapesPathsLengths[num] * npct / .8) + 'px, ' + shapesPathsLengths[num] + 'px',
+          opacity: 1
         });
         shapesPaths.eq(num - 1).css({
-          'stroke-dasharray': '0px, ' + (shapesPathsLengths[num - 1] * npct / .6) + 'px, ' + shapesPathsLengths[num - 1] + 'px',
-          opacity: 1 - (npct / .3)
+          //'stroke-dasharray': '0px, ' + (shapesPathsLengths[num - 1] * npct / .6) + 'px, ' + shapesPathsLengths[num - 1] + 'px',
+          'stroke-dasharray': shapesPathsLengths[num - 1] + 'px',
+          opacity: 1 - (npct / .2)
         });
       } else {
         shapesPaths.eq(0).css({
