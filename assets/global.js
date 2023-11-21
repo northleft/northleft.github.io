@@ -65,30 +65,8 @@ function init(){
     if (e.originalEvent){
       e = e.originalEvent;
     }
-    
-    let dx = (svgloc.x - e.pageX) / max * 30;
-    let dy = (svgloc.y - e.pageY) / max * 30;
 
-    window.requestAnimationFrame(function(){
-      if (twn){
-        twn.kill();
-      }
-      twn = gsap.to(v, {
-        x: dx,
-        y: dy,
-        delay: 0,
-        duration: .06,
-        ease: 'circ.inOut',
-        onUpdate: function(){
-          jg0.css({
-            transform: 'translate(' + v.x + 'px,' + v.y + 'px)'
-          });
-          jg1.css({
-            transform: 'translate(' + -v.x + 'px,' + -v.y + 'px)'
-          });
-        }
-      });
-    });
+    logoMove(e.pageX, e.pageY);
   })
   .on('scroll', function(){
     let top = win.scrollTop();
@@ -128,6 +106,61 @@ function init(){
   })
   .trigger('resize scroll');
 
+  let deviceX = false;
+  let deviceY = false;
+
+  if (window.DeviceOrientationEvent) {
+    window.addEventListener("deviceorientation", function(ev){
+      if (deviceX === false){
+        deviceX = ev.beta;
+        deviceY = ev.gamma;
+      }
+
+      logoMove(deviceX, deviceY);
+    }, true);
+  } else if (window.DeviceMotionEvent) {
+    window.addEventListener('devicemotion', function(ev){
+      if (deviceX === false){
+        deviceX = ev.acceleration.x;
+        deviceY = ev.acceleration.y;
+      }
+
+      logoMove(deviceX, deviceY);
+    }, true);
+  }
+
+  function logoMove(x, y){
+    let dx = (svgloc.x - x) / max * 30;
+    let dy = (svgloc.y - y) / max * 30;
+
+    window.requestAnimationFrame(function(){
+      if (twn){
+        twn.kill();
+      }
+      twn = gsap.to(v, {
+        x: dx,
+        y: dy,
+        delay: 0,
+        duration: .06,
+        ease: 'circ.inOut',
+        onUpdate: function(){
+          jg0.css({
+            transform: 'translate(' + v.x + 'px,' + v.y + 'px)'
+          });
+          jg1.css({
+            transform: 'translate(' + -v.x + 'px,' + -v.y + 'px)'
+          });
+        }
+      });
+    });
+  }
+
+
+
+
+
+
+
   function resize(){
     let top = win.scrollTop();
     wHeight = win.outerHeight();
@@ -166,6 +199,9 @@ function init(){
   }
 
   resize();
+
+
+
 
   setTimeout(function(){
     win.trigger('resize');
