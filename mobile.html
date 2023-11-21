@@ -25,15 +25,15 @@
     <script>
         if (window.DeviceOrientationEvent) {
             window.addEventListener("deviceorientation", function(event){
-                $('header').html(event.beta + '<br>' + event.gamma)
+                $('header').html('deviceorientation<br>' + event.beta + '<br>' + event.gamma)
             }, true);
         } else if (window.DeviceMotionEvent) {
             window.addEventListener('devicemotion', function(event){
-                $('header').html(event.acceleration.x + '<br>' + event.acceleration.y);
+                $('header').html('devicemotion<br>' + event.acceleration.x + '<br>' + event.acceleration.y);
             }, true);
         } else {
             window.addEventListener("MozOrientation", function(event){
-                $('header').html(orientation.x + '<br>' + orientation.y);
+                $('header').html('MozOrientation<br>' + orientation.x + '<br>' + orientation.y);
             }, true);
         }
     </script>
