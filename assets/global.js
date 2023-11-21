@@ -116,7 +116,7 @@ function init(){
         deviceY = ev.gamma;
       }
 
-      logoMove(deviceX, deviceY);
+      logoMove(ev.beta, ev.gamma);
     }, true);
   } else if (window.DeviceMotionEvent) {
     window.addEventListener('devicemotion', function(ev){
@@ -125,7 +125,7 @@ function init(){
         deviceY = ev.acceleration.y;
       }
 
-      logoMove(deviceX, deviceY);
+      logoMove(ev.acceleration.x, ev.acceleration.y);
     }, true);
   }
 
