@@ -133,13 +133,15 @@ function init(){
   }
 
   function deviceOrientation(x, y){
+    let maxangle = 20;
+    let maxdistance = 30;
     let ax = Math.abs(x);
     let ay = Math.abs(y);
 
-    x = Math.min(1, ax / max) * (x / ax);
-    y = Math.min(1, ay / max) * (y / ay);
+    x = Math.min(1, ax / maxangle) * maxdistance * (x / ax);
+    y = Math.min(1, ay / maxangle) * maxdistance * (y / ay);
 
-    console.log(max, x, ax);
+    //console.log(max, x, ax);
 
     logoMove(x, y);
   }
