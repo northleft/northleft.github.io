@@ -139,7 +139,7 @@ function init(){
     x = Math.min(1, ax / max) * (x / ax);
     y = Math.min(1, ay / max) * (y / ay);
 
-    console.log(x, y);
+    console.log(max, x, ax);
 
     logoMove(x, y);
   }
