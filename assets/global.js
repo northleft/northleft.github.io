@@ -66,7 +66,10 @@ function init(){
       e = e.originalEvent;
     }
 
-    logoMove(e.pageX, e.pageY);
+    let x = (svgloc.x - e.pageX) / max * 30;
+    let y = (svgloc.y - e.pageY) / max * 30;
+
+    logoMove(x, y);
   })
   .on('scroll', function(){
     let top = win.scrollTop();
@@ -110,13 +113,13 @@ function init(){
   let deviceY = false;
 
   if (window.DeviceOrientationEvent) {
-    window.addEventListener("deviceorientation", function(ev){
+    window.addEventListener('deviceorientation', function(ev){
       if (deviceX === false){
         deviceX = ev.beta;
         deviceY = ev.gamma;
       }
 
-      logoMove(ev.beta, ev.gamma);
+      logoMove(ev.beta * 10, ev.gamma  * 10);
     }, true);
   } else if (window.DeviceMotionEvent) {
     window.addEventListener('devicemotion', function(ev){
@@ -130,16 +133,14 @@ function init(){
   }
 
   function logoMove(x, y){
-    let dx = (svgloc.x - x) / max * 30;
-    let dy = (svgloc.y - y) / max * 30;
 
     window.requestAnimationFrame(function(){
       if (twn){
         twn.kill();
       }
       twn = gsap.to(v, {
-        x: dx,
-        y: dy,
+        x: x,
+        y: y,
         delay: 0,
         duration: .06,
         ease: 'circ.inOut',
@@ -211,10 +212,10 @@ function init(){
     body.toggleClass('show-nav');
   });
 
-  $('nav a').on('click', function(){
-    body.removeClass('show-nav');
+  $('nav ul').on('click', function(){
+    win.trigger('resize');
     setTimeout(function(){
-      win.trigger('resize');
+    body.removeClass('show-nav');
     }, 10);
   });
 
