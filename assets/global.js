@@ -119,7 +119,7 @@ function init(){
         deviceY = ev.gamma;
       }
 
-      logoMove(ev.beta * 10, ev.gamma  * 10);
+      deviceOrientation(ev.gamma, ev.beta);
     }, true);
   } else if (window.DeviceMotionEvent) {
     window.addEventListener('devicemotion', function(ev){
@@ -128,8 +128,18 @@ function init(){
         deviceY = ev.acceleration.y;
       }
 
-      logoMove(ev.acceleration.x, ev.acceleration.y);
+      deviceOrientation(ev.acceleration.x, ev.acceleration.y);
     }, true);
+  }
+
+  function deviceOrientation(x, y){
+    let ax = Math.abs(x);
+    let ay = Math.abs(y);
+
+    x = Math.min(1, ax / max) * x / ax;
+    y = Math.min(1, ay / max) * y / ay;
+
+    logoMove(x, y);
   }
 
   function logoMove(x, y){
