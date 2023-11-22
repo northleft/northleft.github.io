@@ -136,8 +136,10 @@ function init(){
     let ax = Math.abs(x);
     let ay = Math.abs(y);
 
-    x = Math.min(1, ax / max) * x / ax;
-    y = Math.min(1, ay / max) * y / ay;
+    x = Math.min(1, ax / max) * (x / ax);
+    y = Math.min(1, ay / max) * (y / ay);
+
+    console.log(x, y);
 
     logoMove(x, y);
   }
@@ -203,7 +205,7 @@ function init(){
 
     document.documentElement.style.setProperty(
       '--navpad',
-      getScrollbarWidth + 'px'
+      getScrollbarWidth() + 'px'
     );
 
     win.trigger('scroll');
