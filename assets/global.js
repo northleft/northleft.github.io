@@ -141,13 +141,10 @@ function init(){
     x = Math.min(1, ax / maxangle) * maxdistance * (x / ax);
     y = Math.min(1, ay / maxangle) * maxdistance * (y / ay);
 
-    //console.log(max, x, ax);
-
     logoMove(x, y);
   }
 
   function logoMove(x, y){
-
     window.requestAnimationFrame(function(){
       if (twn){
         twn.kill();
@@ -169,12 +166,6 @@ function init(){
       });
     });
   }
-
-
-
-
-
-
 
   function resize(){
     let top = win.scrollTop();
@@ -215,9 +206,6 @@ function init(){
 
   resize();
 
-
-
-
   setTimeout(function(){
     win.trigger('resize');
   }, 1000);
@@ -229,7 +217,7 @@ function init(){
   $('nav ul').on('click', function(){
     win.trigger('resize');
     setTimeout(function(){
-    body.removeClass('show-nav');
+      body.removeClass('show-nav');
     }, 10);
   });
 
