@@ -54,13 +54,15 @@ body{
   background: #1e4c62;
   color: white;
 
-  font-family: 'Quicksand', serif;
-  font-size: 22px;
   overflow-x: hidden;
   overflow-y: scroll;
   padding: 0px 0px 10px;
   height: auto;
   box-sizing: border-box;
+
+  font-family: 'Quicksand', serif;
+  font-size: 22px;
+  line-height: 1.35em;
 }
 br{
   clear: both;
@@ -243,7 +245,7 @@ header svg path{
   stroke-dashoffset: 1;
 }
 
-section p a{
+p a{
   text-decoration: underline;
 }
 
@@ -254,6 +256,7 @@ section p a{
   width: 100%;
   transform: translate(0px, -100%);
   text-align: center;
+  padding: 0px 0px 8px;
 }
 #hello h1 small{
   display: block;
