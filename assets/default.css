@@ -198,14 +198,6 @@ section ul li:before{
   opacity: 1;
 }
 #bg1{
-  /*
-  background: 
-    radial-gradient(max(120vh, 100vw) at bottom right, rgb(150, 126, 188, 1), rgba(150, 126, 188, 0)) center center/100% 100% no-repeat,
-    radial-gradient(max(120vh, 100vw) at top left, rgba(121, 203, 235, 1), rgba(121, 203, 235, 0)) center center/100% 100% no-repeat,
-    gray;
-  background: url(images/bg1.webp) bottom center/cover no-repeat;
-  radial-gradient(100vw at bottom right, rgb(145, 165, 193, 1), rgba(233, 186, 164, 0)) center center/100% 100% no-repeat,
-  */
   background: 
   radial-gradient(100vw at bottom right, rgb(145, 165, 193, 1), rgba(145, 165, 193, 0)) center center/100% 100% no-repeat,
   radial-gradient(100vw at top left, rgba(0, 69, 95, 1), rgba(0, 69, 95, 0)) center center/100% 100% no-repeat,
@@ -278,14 +270,36 @@ p a{
   float: left;
 }
 #about ul li{
-  background: rgba(255, 255, 255, .1);
-  padding: 6px 8px;
+  background: rgba(255, 255, 255, .08);
+  padding: 8px 12px;
   border-radius: 500px;
   margin: 0px 8px 8px 0px;
-  border: rgba(255,255,255,.5) solid 1px;
+  border: rgba(255,255,255,.2) solid 1px;
 }
 #about p:last-child{
   text-align: center;
+}
+#about-icons,
+#about-icons a,
+#about-icons a img{
+  display: block;
+  position: relative;
+  float: left
+}
+#about-icons{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+  margin: 24px 0px 48px;
+}
+#about-icons a{
+  margin: 8px;
+}
+#about-icons a img{
+  height: 56px;
+  width: auto;
 }
 
 #drawings figure:first-child{
@@ -299,21 +313,30 @@ p a{
   justify-content: space-around;
 }
 
-@media (min-width: 550px){
+#footer-icons a,
+#footer-icons a img{
+  display: block;
+  position: relative;
+  float: left;
+}
+#footer-icons a{
+  margin: 0px 10px 0px 0px;
+}
+#footer-icons a img{
+  height: 48px;
+  width: auto;
+}
+
+@media (min-width: 680px){
   footer p{
     display: block;
     position: relative;
     float: left;
   }
-  footer p + p{
+  #footer-icons{
     float: right;
   }
-  /*
-  footer p a,
-  footer p a img{
-    display: block;
-    position: relative;
-    float: left;
-  }*/
-  
+  #footer-icons a{
+    margin: 0px 0px 0px 10px;
+  }
 }
