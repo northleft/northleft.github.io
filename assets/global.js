@@ -3,7 +3,12 @@ var wWidth = 0;
 var wHeight = 0;
 
 function bgloaded(el){
-  el.classList.add('loaded'); 
+  el.classList.add('loaded');
+
+  setTimeout(function(){
+    setupScroller();
+    setupScrolling();
+  }, 310);
 }
 
 function init(){
@@ -42,8 +47,42 @@ function init(){
   }).trigger('resize');
   
   setupHeader();
-  setupScroller();
   setupFooter();
+}
+
+function setupScrolling(){
+  body.addClass('use-scroller')
+  const shim = $('#shim')
+  const div = $('main > div:first-child');
+  let bodyHeight = 0;
+  let twn = false;
+
+  $('img').on('load', resize);
+
+  function resize(){
+    bodyHeight = div.outerHeight() + 100;
+    shim.height(bodyHeight);
+
+    if (twn){
+      twn.kill();
+    }
+
+    twn = gsap.fromTo(div, {
+      y: 0
+    }, {
+      y: wHeight - bodyHeight,
+      scrollTrigger: {
+        id: 'div',
+        start: 0,
+        end: bodyHeight,
+        scrub: .55
+      }
+    })
+  }
+
+  win
+  .on('resize', resize)
+  .trigger('resize');
 }
 
 function setupFooter(){

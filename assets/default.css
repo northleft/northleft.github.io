@@ -323,7 +323,7 @@ p a{
   margin: 0px 10px 0px 0px;
 }
 #footer-icons a img{
-  height: 48px;
+  height: 40px;
   width: auto;
 }
 
@@ -339,4 +339,19 @@ p a{
   #footer-icons a{
     margin: 0px 0px 0px 10px;
   }
+}
+
+
+
+/*
+Scrolling experiements
+*/
+.use-scroller main{
+  display: block;
+  position: fixed;
+  float: none;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
 }
