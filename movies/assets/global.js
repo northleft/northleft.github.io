@@ -2,7 +2,7 @@
 
 function init(){
   $.ajax({
-    url: 'data/data.json',
+    url: 'data/data.json?' + Date.now(),
     dataType: 'json'
   }).done(setupData);
 }
