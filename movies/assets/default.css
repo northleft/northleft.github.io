@@ -366,6 +366,9 @@ main{
   width: 160px;
   height: auto;
 }
+#movie-detail-thumb{
+  margin: 0px 0px 8px;
+}
 #movie-detail-copy{
   box-sizing: border-box;
   padding-left: 32px;
