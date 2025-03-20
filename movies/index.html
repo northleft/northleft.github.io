@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Movie Matrix</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="description" content="Movie database website test project">
+    <meta name="keywords" content="">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&family=Raleway:wght@300;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/default.css">
+    
+    <script src="assets/jquery-3.7.1.min.js"></script>
+    <script src="assets/global.js"></script>
+    
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Movie Matrix
+      </header>
+      <section id="movies" class="movie-block-container">
+        <figure data-id="{{id}}" class="movie-block movie-block-place movie-block-template">
+          <p class="movie-title"><strong>{{title}}</strong></p>
+          <div class="movie-thumb">
+            <img class="movie-thumb-img" src="{{thumburl}}" width="120" height="183">
+            <button class="movie-info">i</button>
+          </div>
+          <p class="movie-rating">
+            <span class="movie-rating-value"><span>{{ratingScore}}</span></span>
+            <span class="movie-rating-action">
+              <button class="movie-rating-like"><img src="assets/thumb.svg" width="20" height="20"></button>
+              <button class="movie-rating-dislike"><img src="assets/thumb.svg" width="20" height="20"></button>
+            </span>
+          </p>
+        </figure>
+        <div id="movie-detail" class="movie-block-template">
+          <div id="movie-detail-screen"></div>
+          <div id="movie-detail-content">
+            <div>
+              <img id="movie-detail-thumb" src="{{thumburl}}" width="160">
+              <p class="movie-rating">
+                <span class="movie-rating-value"><span>{{ratingScore}}</span></span>
+                <span class="movie-rating-action">
+                  <button class="movie-rating-like"><img src="assets/thumb.svg" width="20" height="20"></button>
+                  <button class="movie-rating-dislike"><img src="assets/thumb.svg" width="20" height="20"></button>
+                </span>
+              </p>
+            </div>
+            <div id="movie-detail-copy">
+              <h2>{{title}}</h2>
+  
+              <p>
+                <span id="movie-detail-rating">{{mpaarating}}</span>
+                <span id="movie-detail-length">{{totaltime}}</span>
+              </p>
+  
+  
+              <p id="movie-detail-description">{{description}}</p>
+  
+            </div>
+            <div id="movie-detail-exit"></div>
+          </div>
+        </div>
+      </section>
+      
+      <footer>
+        <p>
+          &copy;2025 <a href="https://juan-garcia.dev" target="_blank">Juan Garcia</a><br>
+        </p>
+      </footer>
+
+      
+    </main>
+    
+    <script>init();</script>
+  </body>
+  
+</html>
+
+
+
+
+
