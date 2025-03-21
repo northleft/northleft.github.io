@@ -129,7 +129,7 @@ footer{
   box-sizing: border-box;
 }
 main{
-  padding: 2em;
+  padding: 1em;
   max-width: 1260px;
 }
 #shim{
@@ -142,12 +142,16 @@ main{
 
 .movie-block-container{
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 2em;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 1em;
   overflow: visible;
 }
 @media (min-width: 460px){
+  main{
+    padding: 2em;
+  }
   .movie-block-container{
+    grid-gap: 2em;
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -354,9 +358,6 @@ main{
   border: rgb(101, 101, 101) solid 2px;
 
   box-sizing: border-box;
-  padding: 32px;
-
-  display: flex;
 }
 #movie-detail-thumb-container,
 #movie-detail-thumb-container > img{
@@ -372,7 +373,6 @@ main{
 #movie-detail-copy{
   box-sizing: border-box;
   padding-left: 32px;
-  width: calc(100% - 160px);
 }
 #movie-detail-copy h2{
   padding: 0px;
@@ -408,7 +408,66 @@ main{
   border-radius: 50%;
   cursor: pointer;
 }
-
+#movie-detail-exit:after{
+  content: '';
+  display: block;
+  position: absolute;
+  float: none;
+  top: -10px;
+  right: -10px;
+  bottom: -10px;
+  left: -10px;
+}
+@media (min-width: 460px){
+  #movie-detail-content{
+    padding: 32px;
+    display: flex;
+  }
+  #movie-detail-thumb-container{
+    max-width: 40%;
+  }
+  #movie-detail-copy{
+    width: calc(100% - 160px);
+  }
+  #movie-detail-description2{
+    display: none;
+  }
+}
+@media (max-width: 460px){
+  #movie-detail-content{
+    padding: 1.5em .5em ;
+  }
+  #movie-detail-content h2{
+    font-size: 20px;
+  }
+  #movie-detail-copy,
+  #movie-detail-thumb-container,
+  #movie-detail-description2{
+    display: block;
+    position: relative;
+    float: left;
+  }
+  
+  #movie-detail-thumb-container{
+    width: 50%;
+  }
+  #movie-detail-thumb-container > img{
+    width: 100%;
+  }
+  #movie-detail-copy{
+    padding-left: .5em;
+    width: 50%;
+  }
+  #movie-detail-description{
+    display: none;
+  }
+  #movie-detail-description2{
+    padding: .5em 0px 0px;
+    width: 100%;
+    font-size: 20px;
+    line-height: normal;
+  }
+}
 
 
 p a{

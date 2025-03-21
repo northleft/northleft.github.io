@@ -215,28 +215,36 @@ function setupData(d){
     el.find('.movie-thumb-img').on('load', function(){
       el.removeClass('movie-block-place');
     });
-    all.find('.movie-rating-like').on('click', function(){
-      likes++;
-      ratingScore();
-    });
-    all.find('.movie-rating-dislike').on('click', function(){
-      dislikes++;
-      ratingScore();
-    });
     el.find('.movie-info').on('click', function(){
       movieContainer.find('#movie-detail').remove();
       movieContainer.append(detail);
+      addEvents(detail);
     });
 
-    detail.find('#movie-detail-exit').on('click', function(){
-      movieContainer.find('#movie-detail').remove();
-    })
+    addEvents(el);
 
+    function addEvents(div){
+      div.find('.movie-detail-exit').on('click', function(){
+        movieContainer.find('#movie-detail').remove();
+      });
+      div.find('.movie-rating-like').on('click', function(){
+        likes++;
+        ratingScore();
+      });
+      div.find('.movie-rating-dislike').on('click', function(){
+        dislikes++;
+        ratingScore();
+      });
+    }
 
     return {
       id: movieinfo.id,
       el: el
     }
   }
+
+  $(window).on('resize', function(){
+    movieContainer.find('#movie-detail').remove();
+  })
 }
 

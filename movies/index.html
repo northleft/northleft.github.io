@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <title>Movie Matrix</title>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <meta name="description" content="Movie database website test project">
     <meta name="keywords" content="">
     <meta charset="UTF-8">
@@ -41,7 +40,7 @@
           </p>
         </figure>
         <div id="movie-detail" class="movie-block-template">
-          <div id="movie-detail-screen"></div>
+          <div id="movie-detail-screen" class="movie-detail-exit"></div>
           <div id="movie-detail-content">
             <div id="movie-detail-thumb-container">
               <img id="movie-detail-thumb" src="{{thumburl}}" width="160">
@@ -64,7 +63,8 @@
   
               <p id="movie-detail-description">{{description}}</p>
             </div>
-            <div id="movie-detail-exit"></div>
+            <p id="movie-detail-description2">{{description}}</p>
+            <div id="movie-detail-exit" class="movie-detail-exit"></div>
           </div>
         </div>
       </section>
