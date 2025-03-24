@@ -23,6 +23,14 @@
     <main>
       <header>
         <h1>Movie Matrix</h1>
+        <label>Sort by:&nbsp;
+        <select id="moviesort">
+          <option value="score">Rating</option>
+          <option value="sorttitle">A &rarr; Z</option>
+          <option value="released">Release Date</option>
+        </select>
+        </label>
+        <br><br>
       </header>
       <section id="movies" class="movie-block-container">
         <figure data-id="{{id}}" class="movie-block movie-block-place movie-block-template">

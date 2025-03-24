@@ -8,7 +8,8 @@ const theData = [
     "length": "94",
     "thumburl": "movie-black-bag.jpeg",
     "likes": "20",
-    "dislikes": "14"
+    "dislikes": "14",
+    "released": "20250314"
   },
   {
     "id": "1NSR4R",
@@ -19,7 +20,8 @@ const theData = [
     "length": "127",
     "thumburl": "movie-captain-america-brave-new-world.jpeg",
     "likes": "33",
-    "dislikes": "2"
+    "dislikes": "2",
+    "released": "20250214"
   },
   {
     "id": "4TXB83",
@@ -30,7 +32,8 @@ const theData = [
     "length": "94",
     "thumburl": "movie-dog-man.jpeg",
     "likes": "50",
-    "dislikes": "60"
+    "dislikes": "60",
+    "released": "20250131"
   },
   {
     "id": "X0EBV8",
@@ -41,7 +44,8 @@ const theData = [
     "length": "93",
     "thumburl": "movie-last-breath.jpeg",
     "likes": "44",
-    "dislikes": "88"
+    "dislikes": "88",
+    "released": "20250228"
   },
   {
     "id": "4V3DIT",
@@ -52,7 +56,8 @@ const theData = [
     "length": "95",
     "thumburl": "movie-locked.jpeg",
     "likes": "2",
-    "dislikes": "6"
+    "dislikes": "6",
+    "released": "20250321"
   },
   {
     "id": "WO8ERC",
@@ -63,7 +68,8 @@ const theData = [
     "length": "140",
     "thumburl": "movie-mickey-17.jpeg",
     "likes": "8",
-    "dislikes": "3"
+    "dislikes": "3",
+    "released": "20250307"
   },
   {
     "id": "5NUWYO",
@@ -74,7 +80,8 @@ const theData = [
     "length": "110",
     "thumburl": "movie-novocaine.jpeg",
     "likes": "56",
-    "dislikes": "40"
+    "dislikes": "40",
+    "released": "20250314"
   },
   {
     "id": "35Z9RW",
@@ -85,7 +92,8 @@ const theData = [
     "length": "109",
     "thumburl": "movie-snow-white.jpeg",
     "likes": "6",
-    "dislikes": "3"
+    "dislikes": "3",
+    "released": "20250321"
   },
   {
     "id": "KT5MSR",
@@ -96,7 +104,8 @@ const theData = [
     "length": "123",
     "thumburl": "movie-the-alto-knights.jpeg",
     "likes": "8",
-    "dislikes": "4"
+    "dislikes": "4",
+    "released": "20250321"
   },
   {
     "id": "5J8L5Q",
@@ -107,7 +116,8 @@ const theData = [
     "length": "91",
     "thumburl": "movie-the-day-the-earth-blew-up.jpeg",
     "likes": "7",
-    "dislikes": "3"
+    "dislikes": "3",
+    "released": "20250314"
   },
   {
     "id": "H1N2XC",
@@ -118,7 +128,8 @@ const theData = [
     "length": "100",
     "thumburl": "movie-the-monkey.jpeg",
     "likes": "6",
-    "dislikes": "8"
+    "dislikes": "8",
+    "released": "20250221"
   }
 ]
 
@@ -145,36 +156,33 @@ function setupData(d){
   const detailTemplateHTML = $('<div>').append(detailTemplateEL).remove().html();
 
   // iterates through the json data to create movie objects
-  d.map(function(item, index){
+  d.map(function(item){
     // movie object
-    const movie = movieItem(item);
+    const movie = returnMovieItem(item);
 
     // data tracker
     data[movie.id] = movie;
     data.list.push(movie.id);
-
-    // appends to movie container
-    movieContainer.append(movie.el)
   });
 
-  function movieItem(movieinfo){
+  function returnMovieItem(movieitem){
     // a list of keys to add url prepend
     const addUrlPrependToTheseKeys = ['thumburl'];
-    let likes = parseInt(movieinfo.likes) || 0;
-    let dislikes = parseInt(movieinfo.dislikes) || 0;
-    movieinfo.ratingScore = 0;
+    let likes = parseInt(movieitem.likes) || 0;
+    let dislikes = parseInt(movieitem.dislikes) || 0;
+    movieitem.score = 0;
 
-    const hours = Math.floor(parseInt(movieinfo.length) / 60);
-    const minutes = parseInt(movieinfo.length) % 60;
-    movieinfo.totaltime = (hours > 0 ? hours + 'h ' : '') + minutes + 'm';
+    const hours = Math.floor(parseInt(movieitem.length) / 60);
+    const minutes = parseInt(movieitem.length) % 60;
+    movieitem.totaltime = (hours > 0 ? hours + 'h ' : '') + minutes + 'm';
 
     let itemHTML = itemTemplateHTML;
     let detailHTML = detailTemplateHTML;
-    const keys = Object.keys(movieinfo);
+    const keys = Object.keys(movieitem);
 
     keys.forEach(function(key){
       const reg = new RegExp('{{' + key + '}}', 'g');
-      let value = movieinfo[key];
+      let value = movieitem[key];
 
       if (addUrlPrependToTheseKeys.indexOf(key) > -1){
         value = urlPrepend + value;
@@ -188,10 +196,10 @@ function setupData(d){
     const detail = $(detailHTML);
     const all = el.add(detail);
 
-    function ratingScore(){
+    function score(){
       const ratingClasses = ['movie-rating-high', 'movie-rating-med', 'movie-rating-low'];
       let rating = Math.round(likes / (likes + dislikes) * 100);
-      movieinfo.ratingScore = rating;
+      movieitem.score = rating;
 
       // color coding ratings
       let ratingClass = '';
@@ -210,7 +218,7 @@ function setupData(d){
       .html(rating);
       ;
     }
-    ratingScore();
+    score();
 
     el.find('.movie-thumb-img').on('load', function(){
       el.removeClass('movie-block-place');
@@ -229,22 +237,44 @@ function setupData(d){
       });
       div.find('.movie-rating-like').on('click', function(){
         likes++;
-        ratingScore();
+        score();
       });
       div.find('.movie-rating-dislike').on('click', function(){
         dislikes++;
-        ratingScore();
+        score();
       });
     }
 
-    return {
-      id: movieinfo.id,
-      el: el
-    }
+    movieitem.el = el;
+    movieitem.sorttitle = movieitem.title.toLowerCase().replace('the ', '');
+
+    return movieitem
   }
 
   $(window).on('resize', function(){
     movieContainer.find('#movie-detail').remove();
-  })
+  });
+
+  const msort = $('#moviesort');
+  msort.on('change', function(){
+    const reverseDatesForTheseKeys = ['sorttitle', 'released']
+    const sortby = msort.val();
+    
+    let arr = data.list.sort((a, b) => {
+      if (data[a][sortby] < data[b][sortby]) return 1;
+      if (data[a][sortby] > data[b][sortby]) return -1;
+      return 0;
+    });
+
+    if (reverseDatesForTheseKeys.indexOf(sortby) > -1){
+      arr = arr.reverse();
+    }
+    
+    arr.map(function(item){
+      movieContainer.append(data[item].el)
+    });
+  }).trigger('change');
+
+  console.log(data)
 }
 
