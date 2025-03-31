@@ -165,16 +165,34 @@ function setupData(d){
     data.list.push(movie.id);
   });
 
+/**
+ * Creates and returns a movie item enclosure object
+ * @param {number} movieItem - an data entry from the json array.
+ * @returns {object} Enclosure object with references to data and html elements.
+ */
+
   function returnMovieItem(movieitem){
     // a list of keys to add url prepend
+    // basically to get the correct path from json
     const addUrlPrependToTheseKeys = ['thumburl'];
+
+    // number of likes from the movie entry
     let likes = parseInt(movieitem.likes) || 0;
+
+    // the number of dislikes from the movie entry
     let dislikes = parseInt(movieitem.dislikes) || 0;
+
+    // the rating scored based off of the number a likes vs dislikes
     movieitem.score = 0;
 
+    // hours and minutes to display in the info modal
     const hours = Math.floor(parseInt(movieitem.length) / 60);
     const minutes = parseInt(movieitem.length) % 60;
     movieitem.totaltime = (hours > 0 ? hours + 'h ' : '') + minutes + 'm';
+
+    // setting the date in readable format
+    let released = movieitem.released;
+    movieitem.releasedate = released.substr(4, 2) + '/' + released.substr(6, 2) + '/' + released.substr(0, 4);
 
     let itemHTML = itemTemplateHTML;
     let detailHTML = detailTemplateHTML;
@@ -252,21 +270,32 @@ function setupData(d){
   }
 
   $(window).on('resize', function(){
+    // during browser resize - removes the information modal
     movieContainer.find('#movie-detail').remove();
   });
 
   const msort = $('#moviesort');
   msort.on('change', function(){
-    const reverseDatesForTheseKeys = ['sorttitle', 'released']
-    const sortby = msort.val();
+    // the value at which to sort - from the sort select field.
+    const sortValue = msort.val();
+
+    // removes the -rev for reveresed 
+    const sortby = sortValue.replace('-rev', '');
     
+    // creates a new array that is sorted
     let arr = data.list.sort((a, b) => {
       if (data[a][sortby] < data[b][sortby]) return 1;
       if (data[a][sortby] > data[b][sortby]) return -1;
       return 0;
     });
 
-    if (reverseDatesForTheseKeys.indexOf(sortby) > -1){
+    // reverses these keys
+    const reverseDatesForTheseKeys = [
+      'sorttitle',
+      'released',
+      'score-rev'
+    ]
+    if (reverseDatesForTheseKeys.indexOf(sortValue) > -1){
       arr = arr.reverse();
     }
     

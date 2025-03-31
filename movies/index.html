@@ -12,12 +12,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&family=Raleway:wght@300;600&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="assets/default.css">
     
     <script src="assets/jquery-3.7.1.min.js"></script>
-    <script src="assets/global.js"></script>
-    
+    <script src="assets/global.js?20250331"></script>
+    <link rel="stylesheet" href="assets/default.css?20250331">
   </head>
   <body>
     <main>
@@ -25,9 +23,12 @@
         <h1>Movie Matrix</h1>
         <label>Sort by:&nbsp;
         <select id="moviesort">
-          <option value="score">Rating</option>
-          <option value="sorttitle">A &rarr; Z</option>
-          <option value="released">Release Date</option>
+          <option value="score">Rating &uparrow;</option>
+          <option value="score-rev">Rating &downarrow;</option>
+          <option value="sorttitle">AZ &uparrow;</option>
+          <option value="sorttitle-rev">AZ &downarrow;</option>
+          <option value="released">Release Date &uparrow;</option>
+          <option value="released-rev">Release Date &downarrow;</option>
         </select>
         </label>
         <br><br>
@@ -36,8 +37,8 @@
         <figure data-id="{{id}}" class="movie-block movie-block-place movie-block-template">
           <p class="movie-title"><strong>{{title}}</strong></p>
           <div class="movie-thumb">
-            <img class="movie-thumb-img" src="{{thumburl}}" width="120" height="183">
-            <button class="movie-info">i</button>
+            <button class="movie-info"><img class="movie-thumb-img" src="{{thumburl}}" width="120" height="183">
+            <span>i</span></a></button>
           </div>
           <p class="movie-rating">
             <span class="movie-rating-value"><span>{{ratingScore}}</span></span>
@@ -65,7 +66,8 @@
   
               <p>
                 <span id="movie-detail-rating">{{mpaarating}}</span>
-                <span id="movie-detail-length">{{totaltime}}</span>
+                <span id="movie-detail-length">{{totaltime}}</span><br>
+                <span id="movie-detail-date">{{releasedate}}</span>
               </p>
   
   
