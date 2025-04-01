@@ -290,7 +290,6 @@ main{
 }
 .movie-block-container .movie-rating-action button{
   padding: 2px;
-  opacity: .4;
 }
 .movie-block-container .movie-rating-action button img{
   margin: 4px 2px 0px;
@@ -299,12 +298,13 @@ main{
   transform: rotate(180deg);
   margin: 0px 2px -4px;
 }
-.movie-block-container .movie-block:hover .movie-rating-action button{
+.movie-block-container .movie-block:hover .movie-rating-action button,
+.movie-block-container .movie-rating-action button{
   opacity: .7;
 }
-.movie-block-container .movie-block:hover .movie-rating-action button.movie-rating-like:hover,
-.movie-block-container .movie-block:hover .movie-rating-action button.movie-rating-dislike:hover{
-  opacity: 1
+.movie-rating-action button.movie-rating-like:hover,
+.movie-rating-action button.movie-rating-dislike:hover{
+  opacity: 1 !important;
 }
 
 .movie-block-container .movie-block .movie-title,
