@@ -216,7 +216,9 @@ function setupData(d){
 
     function score(){
       const ratingClasses = ['movie-rating-high', 'movie-rating-med', 'movie-rating-low'];
-      let rating = Math.round(likes / (likes + dislikes) * 100);
+      const rating = Math.round(likes / (likes + dislikes) * 100);
+      const ratingssummerization = `${likes} Thumbs up, ${dislikes} Thumbs down.`;
+      
       movieitem.score = rating;
 
       // color coding ratings
@@ -234,6 +236,7 @@ function setupData(d){
       .removeClass('movie-rating-high movie-rating-med movie-rating-low')
       .addClass(ratingClass)
       .html(rating);
+      all.find('.movie-detail-ratings-summerization').html(ratingssummerization)
       ;
     }
     score();

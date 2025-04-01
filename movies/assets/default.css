@@ -410,10 +410,10 @@ main{
   float: left;
   width: 400px;
 }
-#movie-detail-description{
+#movie-detail-copy p{
   font-size: 18px;
   line-height: normal;
-  padding: 0px;
+  padding: 0px 0px 8px;
 }
 #movie-detail-exit{
   background: gray url(exit.svg) center center no-repeat;
@@ -434,7 +434,7 @@ main{
   bottom: -10px;
   left: -10px;
 }
-@media (min-width: 460px){
+@media (min-width: 560px){
   #movie-detail-content{
     padding: 32px;
     display: flex;
@@ -449,7 +449,7 @@ main{
     display: none;
   }
 }
-@media (max-width: 460px){
+@media (max-width: 559px){
   #movie-detail-content{
     padding: 1.5em .5em ;
   }
