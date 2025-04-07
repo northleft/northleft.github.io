@@ -216,31 +216,19 @@ main{
   border: transparent solid 1px;
 }
 .movie-block-container .movie-thumb img{
+  object-fit: cover;
   transition: opacity 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
   height: auto;
+  aspect-ratio: 346 / 512;
+  cursor: pointer;
 }
-.movie-block-container .movie-thumb .movie-info span{
-  background: rgba(50, 50, 50, .6);
+
+.movie-block-container .movie-rating,
+.movie-block-container .movie-vote-count{
   display: block;
-  position: absolute;
-  float: none;
-  bottom: 5px;
-  right: 5px;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 1px solid #cecece;
-  color: white;
-  padding: 0px;
-  margin: 0px;
-  font-style: italic;
-  font-size: 20px;
-  font-family: 'Times New Roman', Times, serif;
-  color: #cecece;
-  opacity: .6;
-}
-.movie-block-container .movie-thumb button:hover .movie-info{
-  opacity: 1;
+  position: relative;
+  float: left;
+  width: 100%;
 }
 .movie-block-container .movie-rating{
   display: flex;
@@ -282,21 +270,92 @@ main{
   font-size: 18px;
   color: gray;
 }
+.movie-block-container .movie-vote-count{
+  margin: 4px 0px 0px;
+  font-size: 13px;
+}
 .movie-block-container button{
   background: none;
   outline: 0px;
   border: 0px;
   cursor: pointer;
+  padding: 0px;
+  margin: 0px;
 }
-.movie-block-container .movie-rating-action button{
-  padding: 2px;
+.movie-block-container button.movie-rating-button{
+  display: block;
+  position: relative;
+  float: left;
+  width: 30px;
+  height: 30px;
 }
-.movie-block-container .movie-rating-action button img{
-  margin: 4px 2px 0px;
+.movie-block-container button.movie-rating-button span{
+  /*background: url(thumb.svg) center center/24px 24px no-repeat;*/
+  display: block;
+  position: absolute;
+  float: none;
+  width: 24px;
+  height: 28px;
+  top: 50%;
+  left: 50%;
+  margin: -12px 0px 0px -12px;
+
+  background-color: #c8c8c8;
+  mask-image: url(thumb.svg);
 }
-.movie-block-container .movie-rating-action button + button img{
+.movie-block-container button.movie-rating-button.movie-rating-dislike span{
+  margin: -6px 0px 0px -12px;
   transform: rotate(180deg);
-  margin: 0px 2px -4px;
+}
+.movie-block-container [data-voted="like"] button.movie-rating-button.movie-rating-like span{
+  mask-image: url(thumb-fill.svg);
+  background-color: rgb(118, 174, 48);
+}
+.movie-block-container button.movie-rating-button.movie-rating-like.movie-bounce span{
+  animation: bounceIn .75s;
+  animation-iteration-count: 1;
+  animation-delay: 0;
+}
+.movie-block-container button.movie-rating-button.movie-rating-dislike.movie-bounce span{
+  animation: bounceOut .75s;
+  animation-iteration-count: 1;
+  animation-delay: 0;
+}
+
+@keyframes bounceIn {
+	0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+	40% {
+    transform: translateY(-30px);
+  }
+	60% {
+    transform: translateY(-15px);
+  }
+}
+@keyframes bounceOut {
+	0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) rotate(180deg);
+    opacity: 1;
+  }
+	40% {
+    transform: translateY(30px) rotate(180deg);
+  }
+	60% {
+    transform: translateY(15px) rotate(180deg);
+  }
+}
+
+
+
+.movie-block-container [data-voted="dislike"] button.movie-rating-button.movie-rating-dislike span{
+  mask-image: url(thumb-fill.svg);
+  background-color: rgb(235, 53, 29);
+}
+.movie-block-container .movie-rating-action{
+  display: flex;
+  justify-content: space-between;
 }
 .movie-block-container .movie-block:hover .movie-rating-action button,
 .movie-block-container .movie-rating-action button{
@@ -388,11 +447,39 @@ main{
   padding-left: 32px;
 }
 #movie-detail-copy h2{
-  padding: 0px;
-  margin: 0px 0px 8px;
+  margin: 0px 0px 4px;
 }
 
-#movie-detail-rating{
+#movie-detail-copy h2,
+#movie-detail-copy p{
+  line-height: normal;
+  clear: both;
+  padding: 0px 0px 16px;
+}
+
+#movie-detail-copy p{
+  font-size: 18px;
+}
+
+#movie-detail-copy #movie-detail-meta{
+  display: block;
+  position: relative;
+  float: left;
+  width: 100%;
+  clear: both;
+  font-size: 14px;
+}
+#movie-detail-meta span{
+  display: block;
+  position: relative;
+  float: left;
+  margin: 0px 4px 4px 0px;
+}
+#movie-detail-meta span:last-child{
+  margin-bottom: 0px;
+}
+
+#movie-detail-mpaarating{
   display: inline-block;
   text-align: center;
   padding: 2px 5px;
@@ -400,21 +487,11 @@ main{
   font-size: 11px;
   line-height: 11px;
 }
-#movie-detail-length{
-  font-size: 13px;
-}
+#movie-detail-length,
 #movie-detail-date{
-  font-size: 14px;
+  clear: left;
 }
-#movie-detail-filler{
-  float: left;
-  width: 400px;
-}
-#movie-detail-copy p{
-  font-size: 18px;
-  line-height: normal;
-  padding: 0px 0px 8px;
-}
+
 #movie-detail-exit{
   background: gray url(exit.svg) center center no-repeat;
   top: 6px;

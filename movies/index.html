@@ -25,8 +25,8 @@
         <select id="moviesort">
           <option value="score">Rating &uparrow;</option>
           <option value="score-rev">Rating &downarrow;</option>
-          <option value="sorttitle">AZ &uparrow;</option>
-          <option value="sorttitle-rev">AZ &downarrow;</option>
+          <option value="sorttitle">Title &uparrow;</option>
+          <option value="sorttitle-rev">Title &downarrow;</option>
           <option value="released">Release Date &uparrow;</option>
           <option value="released-rev">Release Date &downarrow;</option>
         </select>
@@ -38,15 +38,16 @@
           <p class="movie-title"><strong>{{title}}</strong></p>
           <div class="movie-thumb">
             <button class="movie-info"><img class="movie-thumb-img" src="{{thumburl}}" width="120" height="183">
-            </a></button>
+            </button>
           </div>
           <p class="movie-rating">
             <span class="movie-rating-value"><span>{{ratingScore}}</span></span>
             <span class="movie-rating-action">
-              <button class="movie-rating-like"><img src="assets/thumb.svg" width="20" height="20"></button>
-              <button class="movie-rating-dislike"><img src="assets/thumb.svg" width="20" height="20"></button>
+              <button class="movie-rating-button movie-rating-dislike"><span>&nbsp;</span></button>
+              <button class="movie-rating-button movie-rating-like"><span>&nbsp;</span></button>
             </span>
           </p>
+          <p class="movie-rating-count">{{ratingcount}}</p>
         </figure>
         <div id="movie-detail" class="movie-block-template">
           <div id="movie-detail-screen" class="movie-detail-exit"></div>
@@ -56,16 +57,16 @@
               <p class="movie-rating">
                 <span class="movie-rating-value"><span>{{ratingScore}}</span></span>
                 <span class="movie-rating-action">
-                  <button class="movie-rating-like"><img src="assets/thumb.svg" width="20" height="20"></button>
-                  <button class="movie-rating-dislike"><img src="assets/thumb.svg" width="20" height="20"></button>
+                  <button class="movie-rating-button movie-rating-dislike"><span>&nbsp;</span></button>
+                  <button class="movie-rating-button movie-rating-like"><span>&nbsp;</span></button>
                 </span>
               </p>
             </div>
             <div id="movie-detail-copy">
               <h2>{{title}}</h2>
   
-              <p>
-                <span id="movie-detail-rating">{{mpaarating}}</span>
+              <p id="movie-detail-meta">
+                <span id="movie-detail-mpaarating">{{mpaarating}}</span>
                 <span id="movie-detail-length">{{totaltime}}</span><br>
                 <span id="movie-detail-date">{{releasedate}}</span>
               </p>
