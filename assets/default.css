@@ -601,18 +601,28 @@ footer p{
   display: block;
   position: relative;
   float: left;
-  clear: none;
 }
 footer #footer-links{
   display: flex;
-  gap: calc(var(--padding-base) / 2);
-  float: right;
+  gap: var(--padding-baseHalf);
 }
 footer #footer-links a,
 footer #footer-links a img{
   display: block;
   position: relative;
   float: left;
+}
+
+@media (min-width: 520px){
+  footer p{
+    clear: none;
+  }
+  footer #footer-links{
+    float: right;
+  }
+}
+@media (max-width: 520px){
+  
 }
 
 article{
