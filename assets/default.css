@@ -6,6 +6,7 @@
   --border-radius: 8px;
   --padding-base: 24px;
   --padding-base2: calc(2 * var(--padding-base));
+  --padding-baseHalf: calc(.5 * var(--padding-base));
   --scrollbar-width: 0px;
   --juan-height: 140px;
 
@@ -189,10 +190,27 @@ h1,
 h2,
 h3,
 p,
+ul,
 li{
   padding: 0px 0px var(--padding-base);
   font-weight: normal;
+  clear: both;
 }
+
+li.li{
+  position: relative;
+  padding-left: var(--padding-base);
+  padding-bottom: var(--padding-baseHalf);
+  list-style: none;
+}
+li.li::before{
+  content: '\02022';
+  position: absolute;
+  left: .1em;
+  top: -.2em;
+  font-size: 1.4em;
+}
+
 
 h1,
 h2,
@@ -200,11 +218,17 @@ h3{
   color: var(--color-text-head);
 }
 
+h1,h2{
+  font-family: "DM Serif Display", serif;
+  font-style: italic;
+}
+
 h1{
   font-size: 40px;
-  font-family: "DM Serif Display", serif;
   font-weight: 400;
-  font-style: italic;
+}
+h2{
+  font-size: 28px;
 }
 
 header,
@@ -365,26 +389,30 @@ details[open] summary strong::after{
   color: var(--color-text-head);
 }
 
-#skills,
+.skills,
 #timeline{
   margin-top: 24px;
   margin-bottom: 24px;
   clear: both;
 }
 
-#skills,
-#skills li{
+.skills,
+.skills li{
   display: block;
   position: relative;
   float: left;
 }
-#skills li{
+.skills li{
   background: var(--color-bg);
   padding: 4px 8px;
   border-radius: 500px;
   margin: 0px 8px 8px 0px;
   font-size: .9em;
   color: #fff;
+  clear: none;
+}
+.skills li.sw{
+  background: var(--color-bg2);
 }
 
 #timeline{
@@ -396,12 +424,12 @@ details[open] summary strong::after{
   flex-direction: column;
   padding: 0px;
 }
-#timeline li{
+#timeline li.timeline{
   display: flex;
   gap: var(--padding-base);
   overflow: hidden;
 }
-#timeline li .timeline-time{
+#timeline li.timeline .timeline-time{
   display: block;
   position: relative;
   width: 180px;
@@ -410,7 +438,7 @@ details[open] summary strong::after{
   line-height: normal;
   flex-shrink: 0;
 }
-#timeline li .timeline-plug{
+#timeline li.timeline .timeline-plug{
   background: var(--color-text-head);
   position: relative;
   width: 25px;
@@ -419,7 +447,7 @@ details[open] summary strong::after{
   aspect-ratio: 1 / 1;
   margin: 4px 0px 0px;
 }
-#timeline li .timeline-plug:after{
+#timeline li.timeline .timeline-plug:after{
   content: '';
   background: var(--color-text-head);
   display: block;
@@ -432,7 +460,7 @@ details[open] summary strong::after{
 }
 
 @media (min-width: 621px){
-  #timeline li .timeline-time{
+  #timeline li.timeline .timeline-time{
     white-space: wrap;
     max-width: 36%;
   }
@@ -441,11 +469,11 @@ details[open] summary strong::after{
   }
 }
 @media (max-width: 620px){
-  #timeline li .timeline-time{
+  #timeline li.timeline .timeline-time{
     max-width: 23%;
     font-size: .9rem;
   }
-  #timeline li .timeline-plug{
+  #timeline li.timeline .timeline-plug{
     width: 19px;
     height: 19px;
     margin: 5px 0px 0px;
@@ -455,10 +483,10 @@ details[open] summary strong::after{
   }
 }
 @media (max-width: 420px){
-  #timeline li{
+  #timeline li.timeline{
     gap: calc(var(--padding-base) / 2);
   }
-  #timeline li .timeline-time{
+  #timeline li.timeline .timeline-time{
     max-width: 18%;
     font-size: .9rem;
   }
@@ -523,10 +551,10 @@ details[open] summary strong::after{
     box-shadow 150ms cubic-bezier(0.645, 0.045, 0.355, 1),
     transform 150ms cubic-bezier(0.645, 0.045, 0.355, 1)
     ;
-  box-shadow: 0px 0px 6px rgba(0,0,0,0);
+  box-shadow: 2px 2px 6px rgba(0,0,0,.2);
 }
 #articles-container figure[data-article]:hover img{
-  box-shadow: 6px 16px 6px rgba(0,0,0,.2);
+  box-shadow: 6px 12px 6px rgba(0,0,0,.25);
   transform: translate(0px, -10px);
 }
 #articles-container .article-blank{
@@ -573,6 +601,7 @@ footer p{
   display: block;
   position: relative;
   float: left;
+  clear: none;
 }
 footer #footer-links{
   display: flex;
@@ -791,4 +820,14 @@ TUMBLR STUFF
 }
 #content{
   background: url(images/bg-speckled.png) 0 0/800px 800px repeat;
+}
+#bg-grad-shadow{
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.08) 100%);
+  display: block;
+  position: fixed;
+  float: none;
+  bottom: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 60px;
 }

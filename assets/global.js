@@ -56,7 +56,7 @@ function init(){
     y: 0
   }, {
     y: '-20vh',
-    //ease: 'none',
+    ease: 'none',
     scrollTrigger: {
       trigger: '#bgs',
       start: 0,
@@ -68,13 +68,34 @@ function init(){
     y: 0
   }, {
     y: '-30vh',
-    //ease: 'none',
+    ease: 'none',
     scrollTrigger: {
       trigger: '#bgs',
       start: 0,
       scrub: GSAPscrollSpeed
     }
   });
+
+
+  setTimeout(() => {
+    const emailLink = ['hello', '@juan', '-garcia.', 'dev'].join('')
+    const phoneLink = ['8628', '1240', '94'].join('');
+    const phoneRead = ['862.8', '12.40', '94'].join('');
+
+    [
+      $('#contact'),
+      $('#footer')
+    ].map((container) => {
+      const HTML = container.html();
+      container.html(HTML
+        .replace(/!email!/g, emailLink)
+        .replace(/!phone!/g, phoneLink)
+        .replace(/!phone-read!/g, phoneRead)
+      )
+    })
+  }, 342)
+
+
   
   //setupHeaderSize();
   setupRSS();
