@@ -840,4 +840,5 @@ TUMBLR STUFF
   left: 0px;
   width: 100vw;
   height: 60px;
+  pointer-events: none;
 }
