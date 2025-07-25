@@ -304,7 +304,7 @@ header h1{
   position: relative;
   float: left;
   width: 100%;
-  font-size: clamp(40px, 5vw, 72px);
+  font-size: clamp(60px, 5vw, 72px);
   text-align: center;
   font-weight: normal;
   padding: 0px 0px var(--padding-base);
@@ -588,9 +588,12 @@ footer > div{
 }
 
 footer{
+  background: var(--color-bg2);
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0px;
+  padding: var(--padding-base2) 0px 96px;
 }
 footer > div{
   padding: 0px var(--padding-base);

@@ -40,17 +40,19 @@ function init(){
     content: '#content'
   });
 
-  //gsap.fromTo('#bg-grad-0', {
-  //  y: 0
-  //}, {
-  //  y: '-10vh',
-  //  //ease: 'none',
-  //  scrollTrigger: {
-  //    trigger: '#bgs',
-  //    start: 0,
-  //    scrub: GSAPscrollSpeed
-  //  }
-  //});
+  gsap.fromTo('#bg-grad-0', {
+    y: 0,
+    x: 0
+  }, {
+    //y: -30,
+    x: -70,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#bgs',
+      start: 0,
+      scrub: GSAPscrollSpeed * 5
+    }
+  });
 
   gsap.fromTo('#bg-grad-1', {
     y: 0
@@ -94,8 +96,6 @@ function init(){
       )
     })
   }, 342)
-
-
   
   //setupHeaderSize();
   setupRSS();
@@ -207,7 +207,24 @@ function setupHeaderAnimation(){
       `rgb(${r}, ${g}, ${b})`
     )
   }
-
+  
+  function doColor(num){
+    paths.each(function(index){
+      const color = gradient[(num + index) % gradient.length];
+      gsap.set(this, {
+        //'stroke': `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+        'stroke': color
+      });
+    });
+    setTimeout(() => {
+      requestAnimationFrame(() => {
+        num++;
+        doColor(num);
+      });
+    }, 50)
+  }
+  //doColor(0);
+  
   paths.each(function(j){
     const path = $(this);
     const length = path[0].getTotalLength();
@@ -241,176 +258,8 @@ function setupHeaderAnimation(){
       ease: 'ease.inOut'
     });
   });
-
-
-  
-  function doColor(num){
-    paths.each(function(index){
-      const color = gradient[(num + index) % gradient.length];
-      gsap.set(this, {
-        //'stroke': `rgb(${color[0]}, ${color[1]}, ${color[2]})`
-        'stroke': color
-      });
-    });
-    setTimeout(() => {
-      requestAnimationFrame(() => {
-        num++;
-        doColor(num);
-      });
-    }, 50)
-  }
-  //doColor(0);
 }
 
-function setupHeaderAnimation2(){
-  const container = $('#header-height');
-  const svg = container.find('svg');
-  //const svg2 = svg.clone().appendTo(container);
-  const allPaths = svg.find('path');
-  const paths = svg.find('path, polyline');
-  const duration = 4.25;
-  const pathStagger = .05;
-  const colors = [
-    '#b5179e',
-    '#7209b7',
-    '#480ca8',
-    '#3a0ca3',
-    '#3f37c9',
-    '#4361ee',
-    '#4895ef',
-    '#4361ee',
-    '#3f37c9',
-    '#480ca8',
-    '#7209b7'
-  ];
-
-  // converts to an array of rgb colors [x, x, x]
-  colors.map(function(color, index){
-    colors[index] = hexToRgb(color);
-  });
-
-  const fullColorGap = 11; // might determine the speed of transition
-  let fullColors = [];
-  for (let i = 0; i < colors.length; i++){
-    color0 = colors[i];
-    color1 = colors[(i + 1) % colors.length];
-    for (let j = 0; j < fullColorGap; j++){
-      const pct = j / fullColorGap;
-      const r = (color1[0] - color0[0]) * pct + color0[0];
-      const g = (color1[1] - color0[1]) * pct + color0[1];
-      const b = (color1[2] - color0[2]) * pct + color0[2];
-
-      fullColors.push(
-        `rgb(${r}, ${g}, ${b})`
-      )
-    }
-  }
-  
-  function doColor(num){
-    paths.each(function(index){
-      const color = fullColors[(num + index * fullColorGap) % fullColors.length];
-      gsap.set(this, {
-        //'stroke': `rgb(${color[0]}, ${color[1]}, ${color[2]})`
-        'stroke': color
-      });
-    });
-    requestAnimationFrame(function(){
-      num++;
-      doColor(num);
-    });
-  }
-  //doColor(0);
-
-  paths.each(function(j){
-    const path = $(this);
-    const length = path[0].getTotalLength();
-    const color = colors[j % colors.length];
-
-    gsap.set(path, {
-      'stroke-dasharray': length,
-      'stroke-dashoffset': length,
-      'stroke': `rgb(${color[0]}, ${color[1]}, ${color[2]})`
-    });
-    
-    gsap.to(path, {
-      'stroke-dashoffset': 0,
-      duration: duration,
-      delay: j * pathStagger,
-      ease: 'power2.inOut'
-    });
-  });
-
-  function doPoly(num){
-    const gap = 10;
-    paths.each(function(index){
-      const poly = pathData[(num + index * gap) % pathData.length];
-      $(this).attr('d', poly);
-    });
-    setTimeout(function(){
-      requestAnimationFrame(function(){
-        num++;
-        doPoly(num);
-      });
-    }, 100)
-  }
-
-  function shimmer(){
-    const duration = 16;
-    const shimmerLength = 25;
-
-    svg2.find('path, polyline').each(function(){
-      const path = $(this);
-      const length = path[0].getTotalLength() + shimmerLength;
-      const obj = {val:0}
-
-      gsap.set(path, {
-        'stroke-dasharray': `${shimmerLength} ${length}`,
-        'stroke-dashoffset': 0,
-        'stroke-width': 1.5,
-        'stroke': 'rgba(255, 255, 255, .4)'
-      });
-      
-
-      setTimeout(function(){
-        gsap.to(obj, {
-          val: 1,
-          //'stroke-dashoffset': shimmerLength,
-          duration: duration,
-          ease: 'power2.inOut',
-          onUpdate: () => {
-            gsap.set(path, {
-              'stroke-dashoffset': (1 - obj.val) * length
-            })
-          },
-          onComplete: shimmer
-        });
-      }, 6000)
-    });
-  }
-  //shimmer();
-
-  $('header h1').each(function(){
-    gsap.set(this, {
-      y: 5,
-      opacity: 0,
-    });
-
-    gsap.to(this, {
-      y: 0,
-      opacity: 1,
-      duration: .9,
-      delay: 4,
-      ease: 'ease.inOut'
-    });
-  });
-
-  //translate(-50%, 80px) skewY(-20deg) rotate(-0deg)
-  win.on('resize', function(){
-
-  });
-
-  
-}
 
 function hexToRgb(hex) {
   // Remove the hash if it exists
@@ -647,29 +496,5 @@ function setupScroller(){
 }
 
 function setupHeaderSize(){
-  const header = $('header');
-  const headerDiv = header.children('div').eq(0);
-  const headerMin = 282;
-
-  let resizeInt = null;
-
-  win.on('resize', function(){
-    clearTimeout(resizeInt);
-
-    resizeInt = setTimeout(function(){
-      const windowHeight = win.outerHeight();
-      gsap.fromTo(headerDiv, {
-        top: 0
-      }, {
-        top: `calc(100vh - ${headerMin}px)`,
-        ease: 'none',
-        scrollTrigger: {
-          start: 0,
-          end: windowHeight - headerMin,
-          scrub: 0
-        }
-      });
-    }, 100);
-  })
-
+  
 }
