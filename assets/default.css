@@ -247,6 +247,7 @@ header > div{
 header{
   flex-direction: column;
   height: 100vh;
+  height: 100dvh;
 }
 header > div{
   width: 100%;
