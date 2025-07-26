@@ -96,9 +96,38 @@ function init(){
       )
     })
   }, 342)
+
+  setupDetails();
   
   //setupHeaderSize();
   setupRSS();
+}
+
+function setupDetails(){
+  const details = $('details');
+
+  details.attr('open', true).each(function(){
+    const detail = $(this);
+    detail.find('summary').on('click', function(ev){
+    ev.preventDefault();
+      const isShowing = !!detail.attr('show');
+      if (!isShowing){
+        detail.attr('show', true);
+      } else {
+        detail.removeAttr('show');
+      }
+    });
+  });
+
+  win.on('resize', detailsHeight).trigger('resize');
+  function detailsHeight(){
+    details.each(function(){
+      const that = $(this);
+      const content = that.find('.details-content');
+      const div = content.children('div');
+      content.height(div.outerHeight());
+    })
+  }
 }
 
 function createScroll(div){
